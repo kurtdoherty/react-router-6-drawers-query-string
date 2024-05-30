@@ -18,11 +18,22 @@ const routes = createRoutesFromElements(
     <Route path="/" element={<HomePage />} />
     <Route path="/users">
       <Route index element={<UsersPage />} loader={usersPageLoader} />
-      <Route path=":userId" element={<UserPage />} loader={userPageLoader} />
+      {/* Note: shouldRevalidate here. Without it the loader reruns when drawers are opened */}
+      <Route
+        path=":userId"
+        element={<UserPage />}
+        loader={userPageLoader}
+        shouldRevalidate={({ nextUrl }) => nextUrl.search === ''}
+      />
     </Route>
     <Route path="posts">
       <Route index element={<PostsPage />} loader={postsPageLoader} />
-      <Route path=":postId" element={<PostPage />} loader={postPageLoader} />
+      <Route
+        path=":postId"
+        element={<PostPage />}
+        loader={postPageLoader}
+        shouldRevalidate={({ nextUrl }) => nextUrl.search === ''}
+      />
     </Route>
   </Route>
 )

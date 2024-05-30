@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
-import { getComments } from "../../api/post.js";
+import { getCommentsByPostId } from "../../api/post.js";
 import DrawerHeader from "../DrawerHeader"
 import TextWithNewLines from "../TextWithNewLines"
 
 function CommentsDrawerContent ({ onClose, postId }) {
-  const { data: comments } = useQuery({ queryKey: ['comments', postId], queryFn: () => getComments(postId)})
+  const { data: comments } = useQuery({ queryKey: ['comments', postId], queryFn: () => getCommentsByPostId(postId)})
 
   return (
     <>

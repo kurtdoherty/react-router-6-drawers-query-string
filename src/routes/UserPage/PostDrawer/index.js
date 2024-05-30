@@ -11,7 +11,7 @@ function UserPostDrawer ({ userId }) {
     id: 'user-post-drawer',
     isOpen,
     url: isOpen ? getUserPostUrl(userId, postId) : '',
-    launchUrl: isOpen ? getUserUrl(userId) : '',
+    launchUrl: getUserUrl(userId),
   })
 
   return (

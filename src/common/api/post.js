@@ -3,7 +3,7 @@ export async function getPost (postId) {
   return response.json()
 }
 
-export async function getComments (postId) {
+export async function getCommentsByPostId (postId) {
   const response = await fetch(`https://jsonplaceholder.typicode.com/comments?postId=${postId}`)
   return response.json()
 }

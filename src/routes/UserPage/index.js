@@ -1,9 +1,10 @@
 import { Suspense } from "react";
 import { useLoaderData, Await } from "react-router-dom";
 import DrawerLink from "../../common/components/LinkToDrawer";
-import { getUserPostUrl } from "../../common/utils/urlGetters/user";
+import { getUserPostUrl, getUserOpenTasksUrl } from "../../common/utils/urlGetters/user";
 import UserPostDrawer from "./PostDrawer";
 import UserPostDrawerCommentsDrawer from "./PostCommentsDrawer";
+import UserTasksDrawer from "./TasksDrawer";
 
 function UserPage () {
   const data = useLoaderData()
@@ -20,7 +21,7 @@ function UserPage () {
               </div>
               <div className="mt-8">
                 <h3 className="text-xl font-bold">Tasks</h3>
-                <DrawerLink to="./tasks">
+                <DrawerLink to={getUserOpenTasksUrl(user.id)}>
                   View tasks
                 </DrawerLink>
               </div>
@@ -53,6 +54,7 @@ function UserPage () {
 
               <UserPostDrawer userId={user.id} />
               <UserPostDrawerCommentsDrawer userId={user.id} />
+              <UserTasksDrawer userId={user.id} />
             </>
           )}
         </Await>

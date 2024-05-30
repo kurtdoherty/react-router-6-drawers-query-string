@@ -13,3 +13,11 @@ export function getUserPostCommentsUrl (userId, postId) {
 export function getUserAlbumUrl (userId, albumId) {
   return `/users/${userId}?albumId=${albumId}`;
 }
+
+export function getUserOpenTasksUrl (userId) {
+  return `/users/${userId}?openTasks`;
+}
+
+export function getUserCompletedTasksUrl (userId) {
+  return `/users/${userId}?completedTasks`;
+}

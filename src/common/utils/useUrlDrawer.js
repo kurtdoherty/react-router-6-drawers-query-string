@@ -18,8 +18,6 @@ function useUrlDrawer(props) {
     onOpen: onOpenOption,
   } = props
 
-  console.log('useUrlDrawer', id, url, isOpen, launchUrl)
-
   const navigate = useNavigate()
 
   const onClose = useMemo(
