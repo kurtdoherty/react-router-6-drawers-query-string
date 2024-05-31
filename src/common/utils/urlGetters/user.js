@@ -14,6 +14,10 @@ export function getUserAlbumUrl (userId, albumId) {
   return `/users/${userId}?albumId=${albumId}`;
 }
 
+export function getUserAlbumPhotoUrl (userId, albumId, photoId) {
+  return `/users/${userId}?albumId=${albumId}&photoId=${photoId}`;
+}
+
 export function getUserOpenTasksUrl (userId) {
   return `/users/${userId}?openTasks`;
 }

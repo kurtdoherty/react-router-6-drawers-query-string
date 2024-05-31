@@ -10,10 +10,12 @@ function useUrlDrawer(props) {
   const {
     id,
     url, // required so we can navigate to the drawer in onOpen (only used in getTriggerProps)
-         // could be called openUrl
-    isOpen, // could drop this and replace with isOpenConfig which could be passed to isQueryStringDrawerOpen
-    launchUrl, // required so we can close the drawer. This presumes the URL is within the same app else other onClose items won't work
-               // could be called closeUrl
+         // * could be called openUrl
+    isOpen, // could drop this and replace with isOpenConfig
+    launchUrl, // required so we can close the drawer
+               // * presumes the URL is within the same app else other onClose items (like requery) won't work
+               // * could be called closeUrl
+               // * could just take the current location and not require passing this at all
     onClose: onCloseOption,
     onOpen: onOpenOption,
   } = props

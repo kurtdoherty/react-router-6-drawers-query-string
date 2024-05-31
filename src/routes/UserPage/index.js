@@ -1,10 +1,11 @@
 import { Suspense } from "react";
 import { useLoaderData, Await } from "react-router-dom";
 import DrawerLink from "../../common/components/LinkToDrawer";
-import { getUserPostUrl, getUserOpenTasksUrl } from "../../common/utils/urlGetters/user";
+import { getUserPostUrl, getUserOpenTasksUrl, getUserAlbumUrl } from "../../common/utils/urlGetters/user";
 import UserPostDrawer from "./PostDrawer";
 import UserPostDrawerCommentsDrawer from "./PostCommentsDrawer";
 import UserTasksDrawer from "./TasksDrawer";
+import UserAlbumDrawer from "./AlbumDrawer";
 
 function UserPage () {
   const data = useLoaderData()
@@ -44,7 +45,7 @@ function UserPage () {
                 <ul className="mt-2 list-disc">
                   {user?.albums?.map(album => (
                     <li key={album.id} className="ml-4">
-                      <DrawerLink to={`./album/${album.id}`}>
+                      <DrawerLink to={getUserAlbumUrl(user.id, album.id)}>
                         {album.title}
                       </DrawerLink>
                     </li>
@@ -55,6 +56,7 @@ function UserPage () {
               <UserPostDrawer userId={user.id} />
               <UserPostDrawerCommentsDrawer userId={user.id} />
               <UserTasksDrawer userId={user.id} />
+              <UserAlbumDrawer userId={user.id} />
             </>
           )}
         </Await>
