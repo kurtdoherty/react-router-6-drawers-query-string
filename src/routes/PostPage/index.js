@@ -10,7 +10,7 @@ function PostPage ({ post }) {
   const postPageCommentsDrawerUrl = getPostCommentsUrl(post.id)
   const postPageUrl = getPostUrl(post.id)
   const [comments] = useGetDrawerParams(['comments'])
-  const isCommentsDrawerOpen = comments
+  const isCommentsDrawerOpen = Boolean(comments)
 
   return (
     <>

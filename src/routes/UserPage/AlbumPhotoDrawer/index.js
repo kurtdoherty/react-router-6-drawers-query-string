@@ -1,8 +1,10 @@
-import Drawer from "../../../common/components/Drawer.js";
-import { getUserAlbumPhotoUrl, getUserAlbumUrl } from "../../../common/utils/urlGetters/user.js";
-import useUrlDrawer from "../../../common/utils/useUrlDrawer.js";
-import UserAlbumPhotoDrawerContents from "./content.js";
-import useGetDrawerParams from "../../../common/utils/useGetDrawerParams.js";
+import Drawer from "../../../common/components/Drawer";
+import LoadingDrawerContent from "../../../common/components/LoadingDrawerContent";
+import { getUserAlbumPhotoUrl, getUserAlbumUrl } from "../../../common/utils/urlGetters/user";
+import useGetDrawerParams from "../../../common/utils/useGetDrawerParams";
+import useUrlDrawer from "../../../common/utils/useUrlDrawer";
+import UserAlbumPhotoDrawerContents from "./Content";
+import PhotoQuery from "./Query";
 
 function UserAlbumPhotoDrawer ({ userId }) {
   const [albumId, photoId] = useGetDrawerParams(['albumId', 'photoId'])
@@ -16,7 +18,11 @@ function UserAlbumPhotoDrawer ({ userId }) {
 
   return (
     <Drawer {...getDrawerProps({ size: 'large' })}>
-      {isOpen && <UserAlbumPhotoDrawerContents photoId={photoId} onClose={onClose} />}
+      {isOpen && (
+        <PhotoQuery photoId={photoId} loading={<LoadingDrawerContent onClose={onClose} />}>
+          {photo => <UserAlbumPhotoDrawerContents photo={photo} onClose={onClose} />}
+        </PhotoQuery>
+      )}
     </Drawer>
   );
 }

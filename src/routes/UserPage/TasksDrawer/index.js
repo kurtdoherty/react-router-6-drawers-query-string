@@ -1,9 +1,10 @@
 import Drawer from "../../../common/components/Drawer";
-import { getUserUrl } from "../../../common/utils/urlGetters/user";
+import LoadingDrawerContent from "../../../common/components/LoadingDrawerContent";
+import { getUserOpenTasksUrl, getUserUrl } from "../../../common/utils/urlGetters/user";
+import useGetDrawerParams from "../../../common/utils/useGetDrawerParams";
 import useUrlDrawer from "../../../common/utils/useUrlDrawer";
-import useGetDrawerParams from "../../../common/utils/useGetDrawerParams.js";
-import { getUserOpenTasksUrl } from "../../../common/utils/urlGetters/user";
-import UserTasksDrawerContent from "./content.js";
+import UserTasksDrawerContent from "./Content";
+import TasksDrawerQuery from "./Query";
 
 function UserPostDrawer ({ userId }) {
   const [showOpenTasks, showCompletedTasks] = useGetDrawerParams(['openTasks', 'completedTasks'])
@@ -17,11 +18,18 @@ function UserPostDrawer ({ userId }) {
 
   return (
     <Drawer {...getDrawerProps()}>
-      {isOpen && <UserTasksDrawerContent
-        userId={userId}
-        onClose={onClose}
-        isCompletedVisible={Boolean(showCompletedTasks)}
-      />}
+      {isOpen && (
+        <TasksDrawerQuery userId={userId} loading={<LoadingDrawerContent onClose={onClose} />}>
+          {tasks => (
+            <UserTasksDrawerContent
+              tasks={tasks}
+              userId={userId}
+              onClose={onClose}
+              isCompletedVisible={Boolean(showCompletedTasks)}
+            />
+          )}
+        </TasksDrawerQuery>
+      )}
     </Drawer>
   );
 }

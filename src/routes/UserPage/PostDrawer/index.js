@@ -1,8 +1,10 @@
 import Drawer from "../../../common/components/Drawer";
+import LoadingDrawerContent from "../../../common/components/LoadingDrawerContent";
 import { getUserPostUrl, getUserUrl } from "../../../common/utils/urlGetters/user";
+import useGetDrawerParams from "../../../common/utils/useGetDrawerParams";
 import useUrlDrawer from "../../../common/utils/useUrlDrawer";
-import UserPostDrawerContents from "./content";
-import useGetDrawerParams from "../../../common/utils/useGetDrawerParams.js";
+import UserPostDrawerContents from "./Content";
+import PostQuery from "./Query";
 
 function UserPostDrawer ({ userId }) {
   const [postId] = useGetDrawerParams(['postId'])
@@ -16,7 +18,11 @@ function UserPostDrawer ({ userId }) {
 
   return (
     <Drawer {...getDrawerProps()}>
-      {isOpen && <UserPostDrawerContents postId={postId} userId={userId} onClose={onClose} />}
+      {isOpen && (
+        <PostQuery postId={postId} loading={<LoadingDrawerContent onClose={onClose} />}>
+          {post => <UserPostDrawerContents post={post} userId={userId} onClose={onClose} />}
+        </PostQuery>
+      )}
     </Drawer>
   );
 }

@@ -1,8 +1,10 @@
 import Drawer from "../../../common/components/Drawer";
+import LoadingDrawerContent from "../../../common/components/LoadingDrawerContent";
 import { getUserAlbumUrl, getUserUrl } from "../../../common/utils/urlGetters/user";
+import useGetDrawerParams from "../../../common/utils/useGetDrawerParams";
 import useUrlDrawer from "../../../common/utils/useUrlDrawer";
-import UserAlbumDrawerContents from "./content";
-import useGetDrawerParams from "../../../common/utils/useGetDrawerParams.js";
+import UserAlbumDrawerContents from "./Content";
+import AlbumQuery from "./Query";
 
 function UserAlbumDrawer ({ userId }) {
   const [albumId] = useGetDrawerParams(['albumId'])
@@ -16,7 +18,11 @@ function UserAlbumDrawer ({ userId }) {
 
   return (
     <Drawer {...getDrawerProps()}>
-      {isOpen && <UserAlbumDrawerContents albumId={albumId} userId={userId} onClose={onClose} />}
+      {isOpen && (
+        <AlbumQuery albumId={albumId} loading={<LoadingDrawerContent onClose={onClose} />}>
+          {album => <UserAlbumDrawerContents album={album} userId={userId} onClose={onClose} />}
+        </AlbumQuery>
+      )}
     </Drawer>
   );
 }
