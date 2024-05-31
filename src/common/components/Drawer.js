@@ -9,7 +9,7 @@ const DrawerLayout = styled('div', {
   display: 'flex',
   flexDirection: 'column',
   height: '100vh',
-  width: size === 'small' ? '320px' : '480px',
+  width: size === 'small' ? '320px' : size === 'medium' ? '480px' : '640px',
   padding: '20px',
 }))
 
@@ -55,7 +55,7 @@ Drawer.propTypes = {
    *
    * Small should only be used for filter drawers.
    */
-  size: PropTypes.oneOf(['small', 'medium']),
+  size: PropTypes.oneOf(['small', 'medium', 'large']),
 }
 
 export default Drawer

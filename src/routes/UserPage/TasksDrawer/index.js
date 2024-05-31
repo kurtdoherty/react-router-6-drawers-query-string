@@ -17,11 +17,11 @@ function UserPostDrawer ({ userId }) {
 
   return (
     <Drawer {...getDrawerProps()}>
-      <UserTasksDrawerContent
+      {isOpen && <UserTasksDrawerContent
         userId={userId}
         onClose={onClose}
         isCompletedVisible={Boolean(showCompletedTasks)}
-      />
+      />}
     </Drawer>
   );
 }

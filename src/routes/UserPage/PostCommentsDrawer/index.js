@@ -4,7 +4,7 @@ import useGetDrawerParams from "../../../common/utils/useGetDrawerParams";
 
 function UserPostDrawerCommentsDrawer ({ userId }) {
   const [postId, comments] = useGetDrawerParams(['postId', 'comments'])
-  const isOpen = Boolean(postId) && comments
+  const isOpen = Boolean(postId) && Boolean(comments)
   const userPostDrawerUrl = isOpen ? getUserPostUrl(userId, postId) : ''
   const userPostCommentsUrl = isOpen ? getUserPostCommentsUrl(userId, postId) : ''
 

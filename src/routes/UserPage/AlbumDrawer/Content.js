@@ -6,7 +6,7 @@ import DrawerLink from "../../../common/components/LinkToDrawer";
 import LoadingDrawerContent from "../../../common/components/LoadingDrawerContent";
 import { getUserAlbumPhotoUrl } from "../../../common/utils/urlGetters/user";
 
-function UserAlbumDrawerQuery ({ children, albumId, loading }) {
+function AlbumQuery ({ children, albumId, loading }) {
   const queryResults = useQueries({
     queries: [
       { queryKey: ['album', albumId], queryFn: () => getAlbumById(albumId)},
@@ -24,7 +24,7 @@ function UserAlbumDrawerQuery ({ children, albumId, loading }) {
 
 function UserAlbumDrawerContent ({ onClose, albumId, userId }) {
   return (
-    <UserAlbumDrawerQuery
+    <AlbumQuery
       albumId={albumId}
       loading={<LoadingDrawerContent onClose={onClose} />}
     >
@@ -42,7 +42,7 @@ function UserAlbumDrawerContent ({ onClose, albumId, userId }) {
           </div>
         </>
       )}
-    </UserAlbumDrawerQuery>
+    </AlbumQuery>
   )
 }
 

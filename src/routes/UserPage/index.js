@@ -6,6 +6,7 @@ import UserPostDrawer from "./PostDrawer";
 import UserPostDrawerCommentsDrawer from "./PostCommentsDrawer";
 import UserTasksDrawer from "./TasksDrawer";
 import UserAlbumDrawer from "./AlbumDrawer";
+import UserAlbumPhotoDrawer from "./AlbumPhotoDrawer";
 
 function UserPage () {
   const data = useLoaderData()
@@ -57,6 +58,7 @@ function UserPage () {
               <UserPostDrawerCommentsDrawer userId={user.id} />
               <UserTasksDrawer userId={user.id} />
               <UserAlbumDrawer userId={user.id} />
+              <UserAlbumPhotoDrawer userId={user.id} />
             </>
           )}
         </Await>

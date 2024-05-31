@@ -6,17 +6,15 @@ import DrawerLink from "../../../common/components/LinkToDrawer"
 import LoadingDrawerContent from "../../../common/components/LoadingDrawerContent"
 import { getUserPostCommentsUrl } from "../../../common/utils/urlGetters/user";
 
-function UserPostDrawerQuery ({ children, postId, loading }) {
+function PostQuery ({ children, postId, loading }) {
   const { data, isLoading } = useQuery({ queryKey: ['post', postId], queryFn: () => getPost(postId)})
   if (isLoading) return loading
   return children(data)
 }
 
 function UserPostDrawerContent ({ onClose, postId, userId }) {
-  if (!postId) return null
-
   return (
-    <UserPostDrawerQuery
+    <PostQuery
       postId={postId}
       loading={<LoadingDrawerContent onClose={onClose} />}
     >
@@ -31,7 +29,7 @@ function UserPostDrawerContent ({ onClose, postId, userId }) {
           </p>
         </>
       )}
-    </UserPostDrawerQuery>
+    </PostQuery>
   )
 }
 

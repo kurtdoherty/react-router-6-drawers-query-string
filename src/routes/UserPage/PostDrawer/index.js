@@ -16,7 +16,7 @@ function UserPostDrawer ({ userId }) {
 
   return (
     <Drawer {...getDrawerProps()}>
-      <UserPostDrawerContents postId={postId} userId={userId} onClose={onClose} />
+      {isOpen && <UserPostDrawerContents postId={postId} userId={userId} onClose={onClose} />}
     </Drawer>
   );
 }

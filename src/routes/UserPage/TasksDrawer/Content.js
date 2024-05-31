@@ -27,8 +27,6 @@ function TaskList ({ tasks, isCompletedVisible }) {
 }
 
 function UserTasksDrawerContent ({ onClose, userId, isCompletedVisible }) {
-  if (!userId) return null
-
   return (
     <UserTasksDrawerQuery
       userId={userId}
