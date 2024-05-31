@@ -1,14 +1,11 @@
 import Drawer from "../../../common/components/Drawer";
 import LoadingDrawerContent from "../../../common/components/LoadingDrawerContent";
 import { getUserAlbumUrl, getUserUrl } from "../../../common/utils/urlGetters/user";
-import useGetDrawerParams from "../../../common/utils/useGetDrawerParams";
 import useUrlDrawer from "../../../common/utils/useUrlDrawer";
 import UserAlbumDrawerContents from "./Content";
 import AlbumQuery from "./Query";
 
-function UserAlbumDrawer ({ userId }) {
-  const [albumId] = useGetDrawerParams(['albumId'])
-  const isOpen = Boolean(albumId)
+function UserAlbumDrawer ({ userId, isOpen, albumId }) {
   const { getDrawerProps, onClose } = useUrlDrawer({
     id: 'user-album-drawer',
     isOpen,
