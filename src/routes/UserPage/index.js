@@ -2,7 +2,7 @@ import { Suspense } from "react";
 import { Await, useLoaderData } from "react-router-dom";
 import DrawerLink from "../../common/components/LinkToDrawer";
 import { getUserAlbumUrl, getUserOpenTasksUrl, getUserPostUrl } from "../../common/utils/urlGetters/user";
-import useGetDrawerParams from "../../common/utils/useGetDrawerParams";
+import useDrawerRouteMatch from "../../common/utils/useDrawerRouteMatch";
 import UserAlbumDrawer from "./AlbumDrawer";
 import UserAlbumPhotoDrawer from "./AlbumPhotoDrawer";
 import UserPostDrawerCommentsDrawer from "./PostCommentsDrawer";
@@ -10,32 +10,11 @@ import UserPostDrawer from "./PostDrawer";
 import UserTasksDrawer from "./TasksDrawer";
 
 function UserPageContent ({ user }) {
-  /*
-    Note: Bring drawer visibility to the top of a page so it's clear that:
-    * the page has drawers
-    * which drawers the page has
-    * which query string params affect the drawer visibility
-  */
-  const [
-    postId,
-    comments,
-    albumId,
-    photoId,
-    openTasks,
-    completedTasks,
-  ] = useGetDrawerParams([
-    'postId',
-    'comments',
-    'albumId',
-    'photoId',
-    'openTasks',
-    'completedTasks',
-  ])
-  const isPostDrawerOpen = Boolean(postId)
-  const isPostCommentsDrawerOpen = Boolean(postId) && Boolean(comments)
-  const isTasksDrawerOpen = Boolean(openTasks) || Boolean(completedTasks)
-  const isAlbumDrawerOpen = Boolean(albumId)
-  const isAlbumPhotoDrawerOpen = Boolean(albumId) && Boolean(photoId)
+  const { isOpen: isPostDrawerMatched, params: postDrawerParams } = useDrawerRouteMatch('/post/:postId')
+  const { isOpen: isCommentsDrawerMatched, params: commentDrawerParams } = useDrawerRouteMatch('/post/:postId/comments')
+  const { isOpen: isTasksDrawerMatched, params: taskDrawerParams } = useDrawerRouteMatch('/tasks/:view')
+  const { isOpen: isAlbumDrawerMatched, params: albumDrawerParams } = useDrawerRouteMatch('/album/:albumId')
+  const { isOpen: isPhotoDrawerMatched, params: photoDrawerParams } = useDrawerRouteMatch('/album/:albumId/photo/:photoId')
 
   return (
     <>
@@ -78,29 +57,29 @@ function UserPageContent ({ user }) {
       </div>
 
       <UserPostDrawer
-        isOpen={isPostDrawerOpen}
-        postId={postId}
+        isOpen={isPostDrawerMatched || isCommentsDrawerMatched}
+        postId={postDrawerParams.postId || commentDrawerParams.postId}
         userId={user.id}
       />
       <UserPostDrawerCommentsDrawer
-        isOpen={isPostCommentsDrawerOpen}
-        postId={postId}
+        isOpen={isCommentsDrawerMatched}
+        postId={commentDrawerParams.postId}
         userId={user.id}
       />
       <UserTasksDrawer
-        isOpen={isTasksDrawerOpen}
+        isOpen={isTasksDrawerMatched}
         userId={user.id}
-        isShowingCompletedTasks={Boolean(completedTasks)}
+        isShowingCompletedTasks={taskDrawerParams.view === 'completed'}
       />
       <UserAlbumDrawer
-        albumId={albumId}
-        isOpen={isAlbumDrawerOpen}
+        albumId={albumDrawerParams.albumId || photoDrawerParams.albumId}
+        isOpen={isAlbumDrawerMatched || isPhotoDrawerMatched}
         userId={user.id}
       />
       <UserAlbumPhotoDrawer
-        albumId={albumId}
-        isOpen={isAlbumPhotoDrawerOpen}
-        photoId={photoId}
+        albumId={photoDrawerParams.albumId}
+        isOpen={isPhotoDrawerMatched}
+        photoId={photoDrawerParams.photoId}
         userId={user.id}
       />
     </>

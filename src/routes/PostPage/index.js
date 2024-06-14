@@ -4,13 +4,12 @@ import TextWithNewLines from "../../common/components/TextWithNewLines";
 import DrawerLink from "../../common/components/LinkToDrawer";
 import { getPostCommentsUrl, getPostUrl } from "../../common/utils/urlGetters/post";
 import CommentsDrawer from "../../common/components/CommentsDrawer";
-import useGetDrawerParams from "../../common/utils/useGetDrawerParams";
+import useDrawerRouteMatch from "../../common/utils/useDrawerRouteMatch";
 
 function PostPage ({ post }) {
   const postPageCommentsDrawerUrl = getPostCommentsUrl(post.id)
   const postPageUrl = getPostUrl(post.id)
-  const [comments] = useGetDrawerParams(['comments'])
-  const isCommentsDrawerOpen = Boolean(comments)
+  const { isOpen: isCommentsDrawerMatched } = useDrawerRouteMatch('/comments')
 
   return (
     <>
@@ -31,7 +30,7 @@ function PostPage ({ post }) {
       <CommentsDrawer
         url={postPageCommentsDrawerUrl}
         launchUrl={postPageUrl}
-        isOpen={isCommentsDrawerOpen}
+        isOpen={isCommentsDrawerMatched}
         postId={post.id}
       />
     </>

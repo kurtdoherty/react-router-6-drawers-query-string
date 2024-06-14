@@ -3,5 +3,5 @@ export function getPostUrl (postId) {
 }
 
 export function getPostCommentsUrl (postId) {
-  return `/posts/${postId}?comments`;
+  return `/posts/${postId}?d=/comments`;
 }

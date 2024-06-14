@@ -9,9 +9,11 @@ import { useMemo } from 'react'
 function useUrlDrawer(props) {
   const {
     id,
+    // FINISHED HERE: Pretty sure we don't need this because getTriggerProps would never be used
     url, // required so we can navigate to the drawer in onOpen (only used in getTriggerProps)
          // * could be called openUrl
     isOpen, // could drop this and replace with isOpenConfig
+    // FINISHED HERE: This should be called page URL
     launchUrl, // required so we can close the drawer
                // * presumes the URL is within the same app else other onClose items (like requery) won't work
                // * could be called closeUrl

@@ -10,6 +10,9 @@ function UserPostDrawer ({ postId, userId, isOpen }) {
     id: 'user-post-drawer',
     isOpen,
     url: isOpen ? getUserPostUrl(userId, postId) : '',
+    // FINISHED HERE: Was thinking about if we can move the path
+    // matching to inside the hook
+    path: { path: '/post/:postId', end: false },
     launchUrl: getUserUrl(userId),
   })
 
