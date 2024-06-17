@@ -29,6 +29,7 @@ function PostPage ({ post }) {
       {/* Shared drawer */}
       <CommentsDrawer
         url={postPageCommentsDrawerUrl}
+        id="post-page-comments-drawer"
         launchUrl={postPageUrl}
         isOpen={Boolean(drawerMatch)}
         postId={post.id}

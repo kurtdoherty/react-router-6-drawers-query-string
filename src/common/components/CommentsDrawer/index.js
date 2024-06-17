@@ -4,9 +4,9 @@ import CommentsDrawerContents from "./Content";
 import CommentsQuery from "./Query";
 import LoadingDrawerContent from "../LoadingDrawerContent";
 
-function CommentsDrawer ({ postId, url, launchUrl, isOpen, size = "medium" }) {
+function CommentsDrawer ({ id, postId, url, launchUrl, isOpen, size = "medium" }) {
   const { getDrawerProps, onClose } = useUrlDrawer({
-    id: 'comments-drawer',
+    id,
     isOpen,
     url,
     launchUrl,

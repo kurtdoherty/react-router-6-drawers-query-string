@@ -1,15 +1,14 @@
 import DrawerHeader from "../../../common/components/DrawerHeader"
 import TextWithNewLines from "../../../common/components/TextWithNewLines"
 import DrawerLink from "../../../common/components/LinkToDrawer"
-import { getUserPostCommentsUrl } from "../../../common/utils/urlGetters/user";
 
-function UserPostDrawerContent ({ onClose, post, userId }) {
+function PostDrawerContent ({ onClose, post, userId, commentsUrl }) {
   return (
     <>
       <DrawerHeader category="Post" title={post.title} onClose={onClose} />
       <p><TextWithNewLines text={post.body} /></p>
       <p className="mt-4">
-        <DrawerLink to={getUserPostCommentsUrl(userId, post.id)}>
+        <DrawerLink to={commentsUrl}>
           View comments
         </DrawerLink>
       </p>
@@ -17,4 +16,4 @@ function UserPostDrawerContent ({ onClose, post, userId }) {
   )
 }
 
-export default UserPostDrawerContent
+export default PostDrawerContent
