@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import { Await, Link, useLoaderData } from "react-router-dom";
 import useDrawerRouteMatch from "../../common/utils/useDrawerRouteMatch";
 import PostDrawer from "../../common/components/PostDrawer";
+import LinkToDrawer from "../../common/components/LinkToDrawer";
 
 function PostList ({ posts }) {
   const drawerMatch = useDrawerRouteMatch([
@@ -24,9 +25,9 @@ function PostList ({ posts }) {
             <Link to={`./${post.id}`} className="text-blue-500 hover:underline">
               {post.title}
             </Link> (
-            <Link to={`.?d=/post/${post.id}`} className="text-blue-500 hover:underline">
+            <LinkToDrawer to={`.?d=/post/${post.id}`} className="text-blue-500 hover:underline">
               quick view
-              </Link>
+            </LinkToDrawer>
             )
           </li>
         ))}

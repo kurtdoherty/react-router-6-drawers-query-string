@@ -1,4 +1,4 @@
-import DrawerHeader from "../../../common/components/DrawerHeader"
+import DrawerHeader from "../../../../common/components/DrawerHeader"
 
 
 function UserAlbumPhotoDrawerContents ({ onClose, photo }) {

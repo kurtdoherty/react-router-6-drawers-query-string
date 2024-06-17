@@ -4,14 +4,13 @@ import DrawerLink from "../../common/components/LinkToDrawer";
 import { getUserAlbumUrl, getUserOpenTasksUrl, getUserPostUrl } from "../../common/utils/urlGetters/user";
 import useDrawerRouteMatch from "../../common/utils/useDrawerRouteMatch";
 import UserAlbumDrawer from "./AlbumDrawer";
-import UserAlbumPhotoDrawer from "./AlbumPhotoDrawer";
 import UserPostDrawer from "./PostDrawer";
 import UserTasksDrawer from "./TasksDrawer";
 
 function UserPageContent ({ user }) {
   const drawerMatch = useDrawerRouteMatch([
     '/post/:postId/*',
-    '/album/:albumId/photo?/:photoId?',
+    '/album/:albumId/*',
     '/tasks/:view',
   ])
 
@@ -71,12 +70,6 @@ function UserPageContent ({ user }) {
       <UserAlbumDrawer
         isOpen={Boolean(drawerMatch?.params?.albumId)}
         albumId={drawerMatch?.params?.albumId}
-        userId={user.id}
-      />
-      <UserAlbumPhotoDrawer
-        isOpen={Boolean(drawerMatch?.params?.photoId) && Boolean(drawerMatch?.params?.albumId)}
-        albumId={drawerMatch?.params?.albumId}
-        photoId={drawerMatch?.params?.photoId}
         userId={user.id}
       />
     </>

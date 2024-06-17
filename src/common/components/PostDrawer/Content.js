@@ -6,6 +6,7 @@ import useDrawerRouteMatch from "../../utils/useDrawerRouteMatch"
 import useGetDrawerPath from "../../utils/useGetDrawerPath"
 
 function PostDrawerContent ({ onClose, post, url, id }) {
+  // Note: Child drawer orchestration. `url` is important here
   const drawerPath = useGetDrawerPath(url)
   const drawerMatch = useDrawerRouteMatch([
     `${drawerPath}/comments`,

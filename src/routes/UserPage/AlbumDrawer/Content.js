@@ -1,8 +1,16 @@
 import DrawerHeader from "../../../common/components/DrawerHeader";
 import DrawerLink from "../../../common/components/LinkToDrawer";
 import { getUserAlbumPhotoUrl } from "../../../common/utils/urlGetters/user";
+import UserAlbumPhotoDrawer from "./PhotoDrawer";
+import useDrawerRouteMatch from "../../../common/utils/useDrawerRouteMatch";
+import useGetDrawerPath from "../../../common/utils/useGetDrawerPath";
 
-function UserAlbumDrawerContent ({ onClose, userId, album }) {
+function UserAlbumDrawerContent ({ onClose, userId, album, url }) {
+  const drawerPath = useGetDrawerPath(url)
+  const drawerMatch = useDrawerRouteMatch([
+    `${drawerPath}/photo/:photoId`,
+  ])
+
   return (
     <>
       <DrawerHeader category="Album" title={album.title} onClose={onClose} />
@@ -15,6 +23,13 @@ function UserAlbumDrawerContent ({ onClose, userId, album }) {
           )
         })}
       </div>
+
+      <UserAlbumPhotoDrawer
+        userId={userId}
+        albumId={album.id}
+        isOpen={Boolean(drawerMatch)}
+        photoId={drawerMatch?.params?.photoId}
+      />
     </>
   )
 }
