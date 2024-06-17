@@ -10,7 +10,11 @@ function HomePage () {
       <h3 className="mt-6 text-lg font-bold">What this app has</h3>
       <ul className="mt-4 list-disc">
         <li className="ml-4 mb-2">
-          Drawer stacking<br />
+          Local drawer stacking<br />
+          Users page {'>'} User page {'>'} Album drawer {'>'} Photo drawer
+        </li>
+        <li className="ml-4 mb-2">
+          Shared drawer stacking<br />
           Users page {'>'} User page {'>'} Post drawer {'>'} Comments drawer
         </li>
         <li className="ml-4 mb-2">
