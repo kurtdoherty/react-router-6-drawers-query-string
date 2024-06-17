@@ -2,7 +2,7 @@ import DrawerHeader from "../../../common/components/DrawerHeader"
 import TextWithNewLines from "../../../common/components/TextWithNewLines"
 import DrawerLink from "../../../common/components/LinkToDrawer"
 
-function PostDrawerContent ({ onClose, post, userId, commentsUrl }) {
+function PostDrawerContent ({ onClose, post, commentsUrl }) {
   return (
     <>
       <DrawerHeader category="Post" title={post.title} onClose={onClose} />

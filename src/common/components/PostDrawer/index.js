@@ -4,7 +4,7 @@ import useUrlDrawer from "../../../common/utils/useUrlDrawer";
 import PostDrawerContents from "./Content";
 import PostQuery from "./Query";
 
-function PostDrawer ({ id, postId, url, launchUrl, userId, isOpen, commentsUrl }) {
+function PostDrawer ({ id, postId, url, launchUrl, isOpen, commentsUrl }) {
   const { getDrawerProps, onClose } = useUrlDrawer({
     id,
     isOpen,
@@ -19,7 +19,6 @@ function PostDrawer ({ id, postId, url, launchUrl, userId, isOpen, commentsUrl }
           {post =>
             <PostDrawerContents
               post={post}
-              userId={userId}
               onClose={onClose}
               commentsUrl={commentsUrl}
             />
