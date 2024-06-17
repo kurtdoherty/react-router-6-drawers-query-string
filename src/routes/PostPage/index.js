@@ -9,7 +9,7 @@ import useDrawerRouteMatch from "../../common/utils/useDrawerRouteMatch";
 function PostPage ({ post }) {
   const postPageCommentsDrawerUrl = getPostCommentsUrl(post.id)
   const postPageUrl = getPostUrl(post.id)
-  const { isOpen: isCommentsDrawerMatched } = useDrawerRouteMatch('/comments')
+  const drawerMatch = useDrawerRouteMatch(['/comments'])
 
   return (
     <>
@@ -30,7 +30,7 @@ function PostPage ({ post }) {
       <CommentsDrawer
         url={postPageCommentsDrawerUrl}
         launchUrl={postPageUrl}
-        isOpen={isCommentsDrawerMatched}
+        isOpen={Boolean(drawerMatch)}
         postId={post.id}
       />
     </>

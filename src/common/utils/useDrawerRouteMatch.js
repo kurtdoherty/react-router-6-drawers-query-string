@@ -1,15 +1,18 @@
 import { useLocation } from "react-router-dom"
-import { matchPath } from "react-router"
+import { matchRoutes } from "react-router"
 
-function useDrawerRouteMatch (requiredPattern) {
+function useDrawerRouteMatch (patterns) {
   const location = useLocation()
   const searchParams = new URLSearchParams(location.search)
   const drawerPath = searchParams.get('d') || ''
-  const match = matchPath(requiredPattern, drawerPath)
-  return {
-    isOpen: Boolean(match),
-    params: match?.params ?? {},
+  const matches = matchRoutes(patterns.map(pattern => ({ path: pattern })), drawerPath)
+  if (matches && matches.length > 1) {
+    console.warn('Multiple drawer route matches found:', matches)
   }
+  const match = matches ? matches[0] : null
+  return match
+    ? { path: match.route.path, params: match.params }
+    : null
 }
 
 export default useDrawerRouteMatch

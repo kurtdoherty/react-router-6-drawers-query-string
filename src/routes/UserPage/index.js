@@ -10,15 +10,18 @@ import UserPostDrawer from "./PostDrawer";
 import UserTasksDrawer from "./TasksDrawer";
 
 function UserPageContent ({ user }) {
-  const { isOpen: isPostDrawerMatched, params: postDrawerParams } = useDrawerRouteMatch('/post/:postId')
-  const { isOpen: isCommentsDrawerMatched, params: commentDrawerParams } = useDrawerRouteMatch('/post/:postId/comments')
-  const { isOpen: isTasksDrawerMatched, params: taskDrawerParams } = useDrawerRouteMatch('/tasks/:view')
-  const { isOpen: isAlbumDrawerMatched, params: albumDrawerParams } = useDrawerRouteMatch('/album/:albumId')
-  const { isOpen: isPhotoDrawerMatched, params: photoDrawerParams } = useDrawerRouteMatch('/album/:albumId/photo/:photoId')
+  const drawerMatch = useDrawerRouteMatch([
+    '/post/:postId/:comments?',
+    '/album/:albumId/photo?/:photoId?',
+    '/tasks/:view',
+  ])
 
   return (
     <>
       <h2 className="text-2xl font-bold">{user.name}</h2>
+      <div className="mt-2">
+        {JSON.stringify(drawerMatch)}
+      </div>
       <div className="mt-2">
         <p>Email: {user.email}</p>
         <p>Phone: {user.phone}</p>
@@ -57,29 +60,29 @@ function UserPageContent ({ user }) {
       </div>
 
       <UserPostDrawer
-        isOpen={isPostDrawerMatched || isCommentsDrawerMatched}
-        postId={postDrawerParams.postId || commentDrawerParams.postId}
+        isOpen={Boolean(drawerMatch?.params?.postId)}
+        postId={drawerMatch?.params?.postId}
         userId={user.id}
       />
       <UserPostDrawerCommentsDrawer
-        isOpen={isCommentsDrawerMatched}
-        postId={commentDrawerParams.postId}
+        isOpen={Boolean(drawerMatch?.params?.postId) && Boolean(drawerMatch?.params?.comments)}
+        postId={drawerMatch?.params?.postId}
         userId={user.id}
       />
       <UserTasksDrawer
-        isOpen={isTasksDrawerMatched}
+        isOpen={Boolean(drawerMatch?.params?.view)}
         userId={user.id}
-        isShowingCompletedTasks={taskDrawerParams.view === 'completed'}
+        isShowingCompletedTasks={drawerMatch?.params?.view === 'completed'}
       />
       <UserAlbumDrawer
-        albumId={albumDrawerParams.albumId || photoDrawerParams.albumId}
-        isOpen={isAlbumDrawerMatched || isPhotoDrawerMatched}
+        isOpen={Boolean(drawerMatch?.params?.albumId)}
+        albumId={drawerMatch?.params?.albumId}
         userId={user.id}
       />
       <UserAlbumPhotoDrawer
-        albumId={photoDrawerParams.albumId}
-        isOpen={isPhotoDrawerMatched}
-        photoId={photoDrawerParams.photoId}
+        isOpen={Boolean(drawerMatch?.params?.photoId) && Boolean(drawerMatch?.params?.albumId)}
+        albumId={drawerMatch?.params?.albumId}
+        photoId={drawerMatch?.params?.photoId}
         userId={user.id}
       />
     </>
