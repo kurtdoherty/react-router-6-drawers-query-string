@@ -1,5 +1,4 @@
-import { useLocation } from "react-router-dom"
-import { matchRoutes } from "react-router"
+import { matchRoutes, useLocation } from "react-router"
 
 function useDrawerRouteMatch (patterns) {
   const location = useLocation()

@@ -5,13 +5,12 @@ import { getUserAlbumUrl, getUserOpenTasksUrl, getUserPostUrl } from "../../comm
 import useDrawerRouteMatch from "../../common/utils/useDrawerRouteMatch";
 import UserAlbumDrawer from "./AlbumDrawer";
 import UserAlbumPhotoDrawer from "./AlbumPhotoDrawer";
-import UserPostDrawerCommentsDrawer from "./PostCommentsDrawer";
 import UserPostDrawer from "./PostDrawer";
 import UserTasksDrawer from "./TasksDrawer";
 
 function UserPageContent ({ user }) {
   const drawerMatch = useDrawerRouteMatch([
-    '/post/:postId/:comments?',
+    '/post/:postId/*',
     '/album/:albumId/photo?/:photoId?',
     '/tasks/:view',
   ])
@@ -61,11 +60,6 @@ function UserPageContent ({ user }) {
 
       <UserPostDrawer
         isOpen={Boolean(drawerMatch?.params?.postId)}
-        postId={drawerMatch?.params?.postId}
-        userId={user.id}
-      />
-      <UserPostDrawerCommentsDrawer
-        isOpen={Boolean(drawerMatch?.params?.postId) && Boolean(drawerMatch?.params?.comments)}
         postId={drawerMatch?.params?.postId}
         userId={user.id}
       />

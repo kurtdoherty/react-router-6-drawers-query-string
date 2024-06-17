@@ -3,6 +3,7 @@ import PostDrawer from "../../../common/components/PostDrawer";
 
 function UserPostDrawer ({ postId, userId, isOpen }) {
   return <PostDrawer {...{
+    id: 'user-page-post-drawer',
     postId,
     userId,
     isOpen,
