@@ -9,7 +9,7 @@ import UserTasksDrawer from "./TasksDrawer";
 
 function UserPageContent ({ user }) {
   const drawerMatch = useDrawerRouteMatch([
-    '/post/:postId/*',
+    '/post/:postId/*', // splat means child drawers
     '/album/:albumId/*',
     '/tasks/:view',
   ])

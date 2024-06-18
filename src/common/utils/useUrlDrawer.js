@@ -46,6 +46,7 @@ function useUrlDrawer(props) {
           id,
           isOpen,
           onClose: callAllHandlers(props.onClose, onClose),
+          url,
         }
       },
       getTriggerProps: (props = {}) => ({
@@ -58,7 +59,7 @@ function useUrlDrawer(props) {
       onOpen,
       onClose,
     }),
-    [id, isOpen, onClose, onOpen],
+    [id, isOpen, onClose, onOpen, url],
   )
 }
 

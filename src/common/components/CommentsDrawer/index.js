@@ -1,19 +1,11 @@
-import useUrlDrawer from "../../../common/utils/useUrlDrawer";
 import Drawer from "../../../common/components/Drawer";
 import CommentsDrawerContents from "./Content";
 import CommentsQuery from "./Query";
 import LoadingDrawerContent from "../LoadingDrawerContent";
 
-function CommentsDrawer ({ id, postId, url, launchUrl, isOpen, size = "medium" }) {
-  const { getDrawerProps, onClose } = useUrlDrawer({
-    id,
-    isOpen,
-    url,
-    launchUrl,
-  })
-
+function CommentsDrawer ({ id, postId, isOpen, size = "medium", onClose }) {
   return (
-    <Drawer {...getDrawerProps({ size })}>
+    <Drawer {...{ id, onClose, isOpen, size }}>
       {isOpen && (
         <CommentsQuery postId={postId} loading={<LoadingDrawerContent />}>
           {comments => <CommentsDrawerContents comments={comments} onClose={onClose} />}

@@ -3,22 +3,22 @@ import { Await, Link, useLoaderData } from "react-router-dom";
 import useDrawerRouteMatch from "../../common/utils/useDrawerRouteMatch";
 import PostDrawer from "../../common/components/PostDrawer";
 import LinkToDrawer from "../../common/components/LinkToDrawer";
+import useUrlDrawer from "../../common/utils/useUrlDrawer";
 
 function PostList ({ posts }) {
   const drawerMatch = useDrawerRouteMatch([
-    '/post/:postId/:comments?',
+    '/post/:postId/*',
   ])
+  const { getDrawerProps } = useUrlDrawer({
+    id: "posts-page-post-drawer",
+    isOpen: Boolean(drawerMatch),
+    url: `/posts/?d=/post/${drawerMatch?.params?.postId}`,
+    launchUrl: '/posts',
+  })
 
   return (
     <>
-      <PostDrawer
-        id="posts-page-post-drawer"
-        isOpen={Boolean(drawerMatch)}
-        postId={drawerMatch?.params?.postId}
-        url={`/posts/?d=/post/${drawerMatch?.params?.postId}`}
-        launchUrl={'/posts'}
-        commentsUrl={`/posts/?d=/post/${drawerMatch?.params?.postId}/comments`}
-      />
+      <PostDrawer {...getDrawerProps({ postId: drawerMatch?.params?.postId })}/>
       <ul>
         {posts.map(post => (
           <li key={post.id}>

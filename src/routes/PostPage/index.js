@@ -5,11 +5,17 @@ import DrawerLink from "../../common/components/LinkToDrawer";
 import { getPostCommentsUrl, getPostUrl } from "../../common/utils/urlGetters/post";
 import CommentsDrawer from "../../common/components/CommentsDrawer";
 import useDrawerRouteMatch from "../../common/utils/useDrawerRouteMatch";
+import useUrlDrawer from "../../common/utils/useUrlDrawer";
 
 function PostPage ({ post }) {
   const postPageCommentsDrawerUrl = getPostCommentsUrl(post.id)
-  const postPageUrl = getPostUrl(post.id)
   const drawerMatch = useDrawerRouteMatch(['/comments'])
+  const { getDrawerProps } = useUrlDrawer({
+    id: "post-page-comments-drawer",
+    isOpen: Boolean(drawerMatch),
+    url: postPageCommentsDrawerUrl,
+    launchUrl: getPostUrl(post.id),
+  })
 
   return (
     <>
@@ -27,13 +33,7 @@ function PostPage ({ post }) {
       </p>
 
       {/* Shared drawer */}
-      <CommentsDrawer
-        url={postPageCommentsDrawerUrl}
-        id="post-page-comments-drawer"
-        launchUrl={postPageUrl}
-        isOpen={Boolean(drawerMatch)}
-        postId={post.id}
-      />
+      <CommentsDrawer {...getDrawerProps({ postId: post.id })}/>
     </>
   )
 }
