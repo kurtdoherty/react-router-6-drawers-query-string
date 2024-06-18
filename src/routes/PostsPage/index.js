@@ -12,7 +12,7 @@ function PostList ({ posts }) {
   const { getDrawerProps } = useUrlDrawer({
     id: "posts-page-post-drawer",
     isOpen: Boolean(drawerMatch),
-    url: `/posts/?d=/post/${drawerMatch?.params?.postId}`,
+    drawerPath: `/post/${drawerMatch?.params?.postId}`,
     launchUrl: '/posts',
   })
 

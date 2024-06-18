@@ -13,7 +13,7 @@ function PostPage ({ post }) {
   const { getDrawerProps } = useUrlDrawer({
     id: "post-page-comments-drawer",
     isOpen: Boolean(drawerMatch),
-    url: postPageCommentsDrawerUrl,
+    drawerPath: '/comments',
     launchUrl: getPostUrl(post.id),
   })
 

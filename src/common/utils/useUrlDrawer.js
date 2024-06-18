@@ -2,6 +2,12 @@ import { useNavigate } from 'react-router-dom'
 import { callAllHandlers } from './function'
 import { useMemo } from 'react'
 
+function getDrawerUrl (launchUrl, drawerPath) {
+  const url = new URL(launchUrl, 'http://example.com/')
+  url.searchParams.set('d', drawerPath)
+  return `${url.pathname}${url.search}`
+}
+
 /*
 * could be used for path based or query string based drawers
 * reliance on react-router-dom. We could pull that out if we wanted
@@ -9,18 +15,17 @@ import { useMemo } from 'react'
 function useUrlDrawer(props) {
   const {
     id,
-    // FINISHED HERE: Pretty sure we don't need this because getTriggerProps would never be used
-    url, // required so we can navigate to the drawer in onOpen (only used in getTriggerProps)
-         // * could be called openUrl
-    isOpen, // could drop this and replace with isOpenConfig
-    // FINISHED HERE: This should be called page URL
-    launchUrl, // required so we can close the drawer
-               // * presumes the URL is within the same app else other onClose items (like requery) won't work
-               // * could be called closeUrl
-               // * could just take the current location and not require passing this at all
+    drawerPath, // required so we can navigate to the drawer in onOpen (only used in getTriggerProps)
+                // not sure if getTriggerProps will be used for URLs though. `url` also needed for
+                // nested drawers where we create a pattern like `/album/21/photo/:photoId` for launching
+                // the child drawer. Could make this `drawerPath` only if that makes things easier
+    isOpen,
+    launchUrl,  // required so we can close the drawer
     onClose: onCloseOption,
     onOpen: onOpenOption,
   } = props
+
+  const drawerUrl = getDrawerUrl(launchUrl, drawerPath)
 
   const navigate = useNavigate()
 
@@ -33,9 +38,9 @@ function useUrlDrawer(props) {
 
   const onOpen = useMemo(
     () => callAllHandlers(onOpenOption, () => {
-      navigate(url, { replace: true })
+      navigate(drawerUrl, { replace: true })
     }),
-    [onOpenOption, navigate, url],
+    [onOpenOption, navigate, drawerUrl],
   )
 
   return useMemo(
@@ -46,7 +51,9 @@ function useUrlDrawer(props) {
           id,
           isOpen,
           onClose: callAllHandlers(props.onClose, onClose),
-          url,
+          drawerUrl,
+          drawerPath,
+          launchUrl,
         }
       },
       getTriggerProps: (props = {}) => ({
@@ -59,7 +66,7 @@ function useUrlDrawer(props) {
       onOpen,
       onClose,
     }),
-    [id, isOpen, onClose, onOpen, url],
+    [id, isOpen, onClose, onOpen, drawerUrl, drawerPath, launchUrl],
   )
 }
 

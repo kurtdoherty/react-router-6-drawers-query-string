@@ -1,16 +1,16 @@
 import Drawer from "../../../../common/components/Drawer";
 import LoadingDrawerContent from "../../../../common/components/LoadingDrawerContent";
-import { getUserAlbumPhotoUrl, getUserAlbumUrl } from "../../../../common/utils/urlGetters/user";
+import { getUserAlbumUrl } from "../../../../common/utils/urlGetters/user";
 import useUrlDrawer from "../../../../common/utils/useUrlDrawer";
 import UserAlbumPhotoDrawerContents from "./Content";
 import PhotoQuery from "./Query";
 
-// Note: This is a place+drawer component because of the hard coded id and URL getters
-function UserAlbumPhotoDrawer ({ isOpen, photoId, albumDrawerUrl, albumId, userId }) {
+// Note: Drawer+Context component
+function UserAlbumPhotoDrawer ({ isOpen, photoId, albumId, userId }) {
   const { getDrawerProps, onClose } = useUrlDrawer({
     id: `user-page-album-drawer-photo-drawer`,
     isOpen,
-    url: isOpen ? getUserAlbumPhotoUrl(userId, albumId) : '',
+    drawerPath: isOpen ? `/album/${albumId}/photo/${photoId}` : '',
     launchUrl: getUserAlbumUrl(userId, albumId),
   })
 

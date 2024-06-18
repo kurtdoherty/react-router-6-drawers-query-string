@@ -3,19 +3,16 @@ import TextWithNewLines from "../../../common/components/TextWithNewLines"
 import DrawerLink from "../../../common/components/LinkToDrawer"
 import CommentsDrawer from "../CommentsDrawer"
 import useDrawerRouteMatch from "../../utils/useDrawerRouteMatch"
-import useGetDrawerPath from "../../utils/useGetDrawerPath"
 import useUrlDrawer from "../../utils/useUrlDrawer"
 
-function PostDrawerContent ({ onClose, post, url: postDrawerUrl, id }) {
-  // Note: Child drawer orchestration. `url` is important here
-  const drawerPath = useGetDrawerPath(postDrawerUrl)
+function PostDrawerContent ({ onClose, post, postDrawerUrl, postDrawerPath, id }) {
   const drawerMatch = useDrawerRouteMatch([
-    `${drawerPath}/comments`,
+    `${postDrawerPath}/comments`,
   ])
   const { getDrawerProps } = useUrlDrawer({
     id: `${id}-comments-drawer`,
     isOpen: Boolean(drawerMatch),
-    url: `${postDrawerUrl}/comments`,
+    drawerPath: `${postDrawerPath}/comments`,
     launchUrl: postDrawerUrl,
   })
 

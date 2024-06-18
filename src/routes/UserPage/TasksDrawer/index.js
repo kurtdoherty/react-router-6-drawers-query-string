@@ -1,16 +1,16 @@
 import Drawer from "../../../common/components/Drawer";
 import LoadingDrawerContent from "../../../common/components/LoadingDrawerContent";
-import { getUserOpenTasksUrl, getUserUrl } from "../../../common/utils/urlGetters/user";
+import { getUserUrl } from "../../../common/utils/urlGetters/user";
 import useUrlDrawer from "../../../common/utils/useUrlDrawer";
 import UserTasksDrawerContent from "./Content";
 import TasksDrawerQuery from "./Query";
 
-// Note: This is a place+drawer component because of the hard coded id and URL getters
+// Note: Drawer+Context component
 function UserPostDrawer ({ userId, isOpen, isShowingCompletedTasks }) {
   const { getDrawerProps, onClose } = useUrlDrawer({
     id: 'user-page-tasks-drawer',
     isOpen,
-    url: getUserOpenTasksUrl(userId),
+    drawerPath: `/tasks/open`,
     launchUrl: getUserUrl(userId),
   })
 

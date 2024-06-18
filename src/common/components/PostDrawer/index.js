@@ -3,7 +3,7 @@ import LoadingDrawerContent from "../../../common/components/LoadingDrawerConten
 import PostDrawerContents from "./Content";
 import PostQuery from "./Query";
 
-function PostDrawer ({ id, url, isOpen, onClose, postId }) {
+function PostDrawer ({ id, drawerUrl, drawerPath, isOpen, onClose, postId }) {
   return (
     <Drawer {...{ id, isOpen, onClose }}>
       {isOpen && (
@@ -12,7 +12,8 @@ function PostDrawer ({ id, url, isOpen, onClose, postId }) {
             <PostDrawerContents
               post={post}
               onClose={onClose}
-              url={url}
+              postDrawerUrl={drawerUrl}
+              postDrawerPath={drawerPath}
             />
           }
         </PostQuery>
