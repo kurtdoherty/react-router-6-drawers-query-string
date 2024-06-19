@@ -3,6 +3,8 @@ import LoadingDrawerContent from "../../../common/components/LoadingDrawerConten
 import PostDrawerContents from "./Content";
 import PostQuery from "./Query";
 
+// Note: Shared Drawer component
+// Takes result of `getDrawerProps`
 function PostDrawer ({ id, drawerUrl, drawerPath, isOpen, onClose, postId }) {
   return (
     <Drawer {...{ id, isOpen, onClose }}>

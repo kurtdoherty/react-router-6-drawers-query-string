@@ -7,12 +7,14 @@ import useUrlDrawer from "../../utils/useUrlDrawer"
 
 function PostDrawerContent ({ onClose, post, postDrawerUrl, postDrawerPath, id }) {
   const drawerMatch = useDrawerRouteMatch([
-    `${postDrawerPath}/comments`,
+    `${postDrawerPath}/comments`, // This is a path pattern. Not a path. Easy to get confused in this file
+                                  // Will be /post/12/comments
   ])
   const { getDrawerProps } = useUrlDrawer({
     id: `${id}-comments-drawer`,
     isOpen: Boolean(drawerMatch),
-    drawerPath: `${postDrawerPath}/comments`,
+    drawerPath: `${postDrawerPath}/comments`, // This is a path. could come out of useGetDrawerRouteMatch
+                                              // Will be /post/12/comments
     launchUrl: postDrawerUrl,
   })
 

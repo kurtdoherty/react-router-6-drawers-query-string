@@ -8,6 +8,20 @@ import UserPostDrawer from "./PostDrawer";
 import UserTasksDrawer from "./TasksDrawer";
 
 function UserPageContent ({ user }) {
+
+  // Note: I like having the drawer path patterns and isOpen logic at the page level
+  // * I wonder if we could move useUrlDrawer usage here but the code gets too verbose
+  // * I wonder if we could combine useDrawerRouteMatch and useUrlDrawer into a single
+  //   hook and still keep good visibility at this level
+  // * I think code to show a single drawer on a page is much simpler than showing multiple
+  //   drawers. In fact, when showing a single drawer, I have put useDrawerRouteMatch and
+  //   useUrlDrawer side by side. See `PostPage`
+  // * Drawers get matched and launched from: pages, drawers or drawer contents
+  // * Awkward: Drawer types which all are a little different:
+  //    * not shared (e.g. UserAlbumDrawer)
+  //    * not shared nested (e.g. UserAlbumPhotoDrawer)
+  //    * shared (e.g. PostDrawer, CommentsDrawer)
+  //    * shared nested (e.g. CommentsDrawer)
   const drawerMatch = useDrawerRouteMatch([
     '/post/:postId/*', // splat means child drawers
     '/album/:albumId/*',

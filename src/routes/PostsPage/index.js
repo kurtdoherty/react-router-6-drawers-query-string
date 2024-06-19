@@ -7,12 +7,12 @@ import useUrlDrawer from "../../common/utils/useUrlDrawer";
 
 function PostList ({ posts }) {
   const drawerMatch = useDrawerRouteMatch([
-    '/post/:postId/*',
+    '/post/:postId/*',  // This is a path pattern
   ])
   const { getDrawerProps } = useUrlDrawer({
     id: "posts-page-post-drawer",
     isOpen: Boolean(drawerMatch),
-    drawerPath: `/post/${drawerMatch?.params?.postId}`,
+    drawerPath: `/post/${drawerMatch?.params?.postId}`, // This is a path
     launchUrl: '/posts',
   })
 

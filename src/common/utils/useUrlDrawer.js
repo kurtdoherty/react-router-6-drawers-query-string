@@ -45,15 +45,21 @@ function useUrlDrawer(props) {
 
   return useMemo(
     () => ({
+      // Awkward: Currently used to pass props to `Drawer` but also shared drawers like `PostDrawer`
       getDrawerProps: (props = {}) => {
         return {
           ...props,
           id,
           isOpen,
           onClose: callAllHandlers(props.onClose, onClose),
-          drawerUrl,
-          drawerPath,
-          launchUrl,
+          drawerUrl,  // Passed so drawer contents can add something on the end when creating a link like
+                      // For example, http://localhost#/user/1?d=/album/1 becomes http://localhost#/user/1?d=/album/1/photo/1
+                      // Probably not required if we lean on url getters
+                      // Awkward: A `Drawer` does not need this. But something like `PostDrawer` does.
+          drawerPath, // Passed so drawer contents can use it to see if a child drawer is open with useDrawerRouteMatch
+                      // For example, /album/1 becomes /album/1/photo/:photoId
+                      // Could also use the pattern for the drawer so /album/:albumId becomes /album/:albumId/photo/:photoId
+                      // Awkward: A `Drawer` does not need this. But something like `PostDrawer` does.
         }
       },
       getTriggerProps: (props = {}) => ({
@@ -66,7 +72,7 @@ function useUrlDrawer(props) {
       onOpen,
       onClose,
     }),
-    [id, isOpen, onClose, onOpen, drawerUrl, drawerPath, launchUrl],
+    [id, isOpen, onClose, onOpen, drawerUrl, drawerPath],
   )
 }
 

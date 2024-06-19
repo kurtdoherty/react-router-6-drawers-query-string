@@ -7,7 +7,7 @@ function UserPostDrawer ({ postId, userId, isOpen }) {
   const { getDrawerProps } = useUrlDrawer({
     id: 'user-page-post-drawer',
     isOpen,
-    drawerPath: isOpen ? `/post/${postId}` : '',
+    drawerPath: isOpen ? `/post/${postId}` : '', //  This is a path. Could come from useGetDrawerRouteMatch
     launchUrl: getUserUrl(userId),
   })
 

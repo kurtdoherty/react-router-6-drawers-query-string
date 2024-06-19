@@ -10,7 +10,7 @@ function UserAlbumPhotoDrawer ({ isOpen, photoId, albumId, userId }) {
   const { getDrawerProps, onClose } = useUrlDrawer({
     id: `user-page-album-drawer-photo-drawer`,
     isOpen,
-    drawerPath: isOpen ? `/album/${albumId}/photo/${photoId}` : '',
+    drawerPath: isOpen ? `/album/${albumId}/photo/${photoId}` : '', // This is a path. Could come from useGetDrawerRouteMatch
     launchUrl: getUserAlbumUrl(userId, albumId),
   })
 

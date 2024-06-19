@@ -13,7 +13,7 @@ function PostPage ({ post }) {
   const { getDrawerProps } = useUrlDrawer({
     id: "post-page-comments-drawer",
     isOpen: Boolean(drawerMatch),
-    drawerPath: '/comments',
+    drawerPath: '/comments',  // This is a path. Not a path pattern. Easy to get confused in this file
     launchUrl: getPostUrl(post.id),
   })
 

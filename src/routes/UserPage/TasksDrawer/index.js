@@ -10,7 +10,7 @@ function UserPostDrawer ({ userId, isOpen, isShowingCompletedTasks }) {
   const { getDrawerProps, onClose } = useUrlDrawer({
     id: 'user-page-tasks-drawer',
     isOpen,
-    drawerPath: `/tasks/open`,
+    drawerPath: `/tasks/open`, // This is a path. Could come from useGetDrawerRouteMatch
     launchUrl: getUserUrl(userId),
   })
 

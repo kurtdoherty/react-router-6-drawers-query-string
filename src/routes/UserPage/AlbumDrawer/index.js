@@ -11,7 +11,7 @@ import AlbumQuery from "./Query";
 // * the drawer itself which should just receive isOpen, url (if it has child drawers), launchUrl and necessary IDs
 // * the wiring up of that drawer on a specific page with
 function UserAlbumDrawer ({ userId, isOpen, albumId }) {
-  const drawerPath = `/album/${albumId}`
+  const drawerPath = `/album/${albumId}` // This is a path. Could come from useGetDrawerRouteMatch
   const { getDrawerProps, onClose } = useUrlDrawer({
     id: 'user-page-album-drawer',
     isOpen,
