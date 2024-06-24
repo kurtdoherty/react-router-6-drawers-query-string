@@ -2,9 +2,9 @@
 
 This application acts as a a code example for "query string drawers".
 
-The code example for "routed drawers" can be found at [https://github.com/alexander-bobin/react-router-6-drawers/](https://github.com/alexander-bobin/react-router-6-drawers/).
+The code example for "routed drawers" can be found at [https://github.com/alexander-bobin/react-router-6-drawers/](https://github.com/kurtdoherty/react-router-6-drawers/).
 
-This application is published and usable at [https://alexander-bobin.github.io/react-router-6-drawers-query-string/](https://alexander-bobin.github.io/react-router-6-drawers-query-string/).
+This application is published and usable at [https://alexander-bobin.github.io/react-router-6-drawers-query-string/](https://kurtdoherty.github.io/react-router-6-drawers-query-string/).
 
 ## To run this application locally
 

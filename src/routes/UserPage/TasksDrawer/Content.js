@@ -1,6 +1,5 @@
 import DrawerHeader from "../../../common/components/DrawerHeader"
-import DrawerLink from "../../../common/components/LinkToDrawer"
-import { getUserCompletedTasksUrl, getUserOpenTasksUrl } from "../../../common/utils/urlGetters/user";
+import { DrawerLink } from "../../../common/components/DrawerRouter"
 
 function TaskList ({ tasks, isCompletedVisible }) {
   const filteredTasks = tasks.filter(task => task.completed === isCompletedVisible)
@@ -17,19 +16,19 @@ function TaskList ({ tasks, isCompletedVisible }) {
   );
 }
 
-function UserTasksDrawerContent ({ onClose, userId, tasks, isCompletedVisible }) {
+function UserTasksDrawerContent ({ tasks, isCompletedVisible }) {
   return (
    <>
-      <DrawerHeader title="Tasks" onClose={onClose} />
+      <DrawerHeader title="Tasks" />
       <nav>
         <ul className="flex space-x-4">
           <li>
-            <DrawerLink to={getUserOpenTasksUrl(userId)} className={isCompletedVisible ? '' : 'font-bold' }>
+            <DrawerLink to="../open" className={isCompletedVisible ? '' : 'font-bold' }>
               Open
             </DrawerLink>
           </li>
           <li>
-            <DrawerLink to={getUserCompletedTasksUrl(userId)} className={isCompletedVisible ? 'font-bold' : '' }>
+            <DrawerLink to="../completed" className={isCompletedVisible ? 'font-bold' : '' }>
               Completed
             </DrawerLink>
           </li>

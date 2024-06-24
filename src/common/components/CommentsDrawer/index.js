@@ -1,18 +1,17 @@
-import Drawer from "../../../common/components/Drawer";
 import CommentsDrawerContents from "./Content";
 import CommentsQuery from "./Query";
 import LoadingDrawerContent from "../LoadingDrawerContent";
 
-function CommentsDrawer ({ id, postId, isOpen, size = "medium", onClose }) {
+function CommentsDrawerContentContainer({
+  postId,
+}) {
   return (
-    <Drawer {...{ id, onClose, isOpen, size }}>
-      {isOpen && (
-        <CommentsQuery postId={postId} loading={<LoadingDrawerContent />}>
-          {comments => <CommentsDrawerContents comments={comments} onClose={onClose} />}
-        </CommentsQuery>
+    <CommentsQuery postId={postId} loading={<LoadingDrawerContent />}>
+      {(comments) => (
+        <CommentsDrawerContents comments={comments} />
       )}
-    </Drawer>
+    </CommentsQuery>
   );
 }
 
-export default CommentsDrawer
+export default CommentsDrawerContentContainer;

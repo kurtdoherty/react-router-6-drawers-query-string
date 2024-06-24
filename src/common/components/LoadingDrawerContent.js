@@ -1,9 +1,9 @@
 import DrawerHeader from "./DrawerHeader"
 
-function LoadingDrawerContent ({ onClose }) {
+function LoadingDrawerContent () {
   return (
     <>
-      <DrawerHeader title="Loading ..." onClose={onClose} />
+      <DrawerHeader title="Loading ..." />
       <p>...</p>
     </>
   )

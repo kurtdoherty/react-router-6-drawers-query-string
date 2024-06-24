@@ -1,10 +1,10 @@
 import DrawerHeader from "../DrawerHeader"
 import TextWithNewLines from "../TextWithNewLines"
 
-function CommentsDrawerContent ({ onClose, comments }) {
+function CommentsDrawerContent ({ comments }) {
   return (
     <>
-      <DrawerHeader title="Comments" onClose={onClose} />
+      <DrawerHeader title="Comments" />
       <ul>
         {comments.map(comment => (
           <li key={comment.id} className="mt-6">

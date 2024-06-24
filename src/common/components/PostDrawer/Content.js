@@ -1,34 +1,25 @@
 import DrawerHeader from "../../../common/components/DrawerHeader"
 import TextWithNewLines from "../../../common/components/TextWithNewLines"
-import DrawerLink from "../../../common/components/LinkToDrawer"
-import CommentsDrawer from "../CommentsDrawer"
-import useDrawerRouteMatch from "../../utils/useDrawerRouteMatch"
-import useUrlDrawer from "../../utils/useUrlDrawer"
+import CommentsDrawerContent from "../CommentsDrawer"
+import { DrawerLink, DrawerRoute, DrawerRouter } from "../DrawerRouter"
 
-function PostDrawerContent ({ onClose, post, postDrawerUrl, postDrawerPath, id }) {
-  const drawerMatch = useDrawerRouteMatch([
-    `${postDrawerPath}/comments`, // This is a path pattern. Not a path. Easy to get confused in this file
-                                  // Will be /post/12/comments
-  ])
-  const { getDrawerProps } = useUrlDrawer({
-    id: `${id}-comments-drawer`,
-    isOpen: Boolean(drawerMatch),
-    drawerPath: `${postDrawerPath}/comments`, // This is a path. could come out of useGetDrawerRouteMatch
-                                              // Will be /post/12/comments
-    launchUrl: postDrawerUrl,
-  })
-
+function PostDrawerContent ({ post }) {
   return (
     <>
-      <DrawerHeader category="Post" title={post.title} onClose={onClose} />
+      <DrawerHeader category="Post" title={post.title} />
       <p><TextWithNewLines text={post.body} /></p>
       <p className="mt-4">
-        <DrawerLink to={`${postDrawerUrl}/comments`}>
+        <DrawerLink to="comments">
           View comments
         </DrawerLink>
       </p>
 
-      <CommentsDrawer {...getDrawerProps({ postId: post.id, size: 'small' })}/>
+      {/* NOTE: We may prefer to define these in the "container" so we're not waiting until data
+        * has been fetched before our router determines which drawer route, if any, is open. I've
+        * left it here to reduce the diff between this demo and the original query string routing demo */}
+      <DrawerRouter>
+        <DrawerRoute id="post-drawer-comments" path="comments" element={<CommentsDrawerContent postId={post.id} />} size='small' />
+      </DrawerRouter>
     </>
   )
 }

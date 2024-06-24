@@ -1,33 +1,23 @@
 import { Suspense } from "react";
 import { Await, Link, useLoaderData } from "react-router-dom";
-import useDrawerRouteMatch from "../../common/utils/useDrawerRouteMatch";
 import PostDrawer from "../../common/components/PostDrawer";
-import LinkToDrawer from "../../common/components/LinkToDrawer";
-import useUrlDrawer from "../../common/utils/useUrlDrawer";
+import { DrawerLink, DrawerRouter, DrawerRoute } from "../../common/components/DrawerRouter";
 
 function PostList ({ posts }) {
-  const drawerMatch = useDrawerRouteMatch([
-    '/post/:postId/*',  // This is a path pattern
-  ])
-  const { getDrawerProps } = useUrlDrawer({
-    id: "posts-page-post-drawer",
-    isOpen: Boolean(drawerMatch),
-    drawerPath: `/post/${drawerMatch?.params?.postId}`, // This is a path
-    launchUrl: '/posts',
-  })
-
   return (
     <>
-      <PostDrawer {...getDrawerProps({ postId: drawerMatch?.params?.postId })}/>
+      <DrawerRouter>
+        <DrawerRoute id="post-list-post" path="post/:postId/*" element={({ params }) => <PostDrawer postId={params.postId} />}/>
+      </DrawerRouter>
       <ul>
         {posts.map(post => (
           <li key={post.id}>
-            <Link to={`./${post.id}`} className="text-blue-500 hover:underline">
+            <Link to={String(post.id)} className="text-blue-500 hover:underline">
               {post.title}
             </Link> (
-            <LinkToDrawer to={`.?d=/post/${post.id}`} className="text-blue-500 hover:underline">
+            <DrawerLink to={`post/${post.id}`} className="text-blue-500 hover:underline">
               quick view
-            </LinkToDrawer>
+            </DrawerLink>
             )
           </li>
         ))}

@@ -1,27 +1,18 @@
-import Drawer from "../../../common/components/Drawer";
 import LoadingDrawerContent from "../../../common/components/LoadingDrawerContent";
 import PostDrawerContents from "./Content";
 import PostQuery from "./Query";
 
 // Note: Shared Drawer component
-// Takes result of `getDrawerProps`
-function PostDrawer ({ id, drawerUrl, drawerPath, isOpen, onClose, postId }) {
+function PostDrawerContentContainer ({ postId }) {
   return (
-    <Drawer {...{ id, isOpen, onClose }}>
-      {isOpen && (
-        <PostQuery postId={postId} loading={<LoadingDrawerContent onClose={onClose} />}>
-          {post =>
-            <PostDrawerContents
-              post={post}
-              onClose={onClose}
-              postDrawerUrl={drawerUrl}
-              postDrawerPath={drawerPath}
-            />
-          }
-        </PostQuery>
-      )}
-    </Drawer>
+    <PostQuery postId={postId} loading={<LoadingDrawerContent />}>
+      {post =>
+        <PostDrawerContents
+          post={post}
+        />
+      }
+    </PostQuery>
   );
 }
 
-export default PostDrawer
+export default PostDrawerContentContainer
