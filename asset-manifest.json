@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/react-router-6-drawers-query-string/static/css/main.a446a36c.css",
-    "main.js": "/react-router-6-drawers-query-string/static/js/main.317a88ee.js",
+    "main.css": "/react-router-6-drawers-query-string/static/css/main.f86b43b5.css",
+    "main.js": "/react-router-6-drawers-query-string/static/js/main.daa0794a.js",
     "static/js/453.51aa1719.chunk.js": "/react-router-6-drawers-query-string/static/js/453.51aa1719.chunk.js",
     "index.html": "/react-router-6-drawers-query-string/index.html",
-    "main.a446a36c.css.map": "/react-router-6-drawers-query-string/static/css/main.a446a36c.css.map",
-    "main.317a88ee.js.map": "/react-router-6-drawers-query-string/static/js/main.317a88ee.js.map",
+    "main.f86b43b5.css.map": "/react-router-6-drawers-query-string/static/css/main.f86b43b5.css.map",
+    "main.daa0794a.js.map": "/react-router-6-drawers-query-string/static/js/main.daa0794a.js.map",
     "453.51aa1719.chunk.js.map": "/react-router-6-drawers-query-string/static/js/453.51aa1719.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.a446a36c.css",
-    "static/js/main.317a88ee.js"
+    "static/css/main.f86b43b5.css",
+    "static/js/main.daa0794a.js"
   ]
 }
